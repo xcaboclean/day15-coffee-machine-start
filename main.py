@@ -30,3 +30,29 @@ resources = {
     "coffee": 100,
 }
 
+COIN = {
+    "quarter": 0.25,
+    "dime": 0.10,
+    "nickel": 0.05,
+    "pennie": 0.01
+}
+
+def report(resources):
+    print("Water: ", resources["water"])
+    print("Milk: ", resources["milk"])
+    print("Coffe: ", resources["coffee"])
+
+coins = [0,0,0,0]
+buttonON = True
+
+while buttonON:
+    order = input("What would you like? (espresso/latte/cappuccino):")
+
+    if order == "off":
+        buttonON = False
+    elif order == "report":
+        report(resources)
+    #elif order == "espresso":
+        
+        
+    
