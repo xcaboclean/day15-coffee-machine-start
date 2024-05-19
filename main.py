@@ -49,15 +49,23 @@ def check_resources(resources, recipe_drink):
             return False
     return True
     
-def payment(coins):
+def payment():
     print("Please insert coins.")
-    for i in COIN:
-        #coins[i] = input(
-        print(COIN)
+    amount_paind = 0 
     
-    print(coins)
+    for coin,value in COIN.items():
+        quantity = int(input(f"How many {coin}s?"))
+        amount_paind += quantity * value
 
-coins = [0,0,0,0]
+    return amount_paind
+
+def check_payment():
+    if payment() >= drink['cost']:
+        print("Paid")
+    else:
+        print("No Paid")
+    
+
 led = True
 
 while led == True:
@@ -69,8 +77,9 @@ while led == True:
         report(resources)
     else:
         drink = MENU[order]
-        print(check_resources(resources, drink['ingredients']))
-        payment(coins)
+        if check_resources(resources, drink['ingredients']):
+            if check_payment():
+                print('')
         
         
         
