@@ -49,6 +49,13 @@ def check_resources(resources, recipe_drink):
             return False
     return True
     
+def payment(coins):
+    print("Please insert coins.")
+    for i in COIN:
+        #coins[i] = input(
+        print(COIN)
+    
+    print(coins)
 
 coins = [0,0,0,0]
 led = True
@@ -63,6 +70,7 @@ while led == True:
     else:
         drink = MENU[order]
         print(check_resources(resources, drink['ingredients']))
+        payment(coins)
         
         
         
