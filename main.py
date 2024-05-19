@@ -42,17 +42,28 @@ def report(resources):
     print("Milk: ", resources["milk"])
     print("Coffe: ", resources["coffee"])
 
-coins = [0,0,0,0]
-buttonON = True
+def check_resources(resources, recipe_drink):
+    for ingredient in recipe_drink:
+        if recipe_drink[ingredient] > resources[ingredient]:
+            print(f"Sorry there is not enough {ingredient}")
+            return False
+    return True
+    
 
-while buttonON:
+coins = [0,0,0,0]
+led = True
+
+while led == True:
     order = input("What would you like? (espresso/latte/cappuccino):")
 
     if order == "off":
-        buttonON = False
+        led = False
     elif order == "report":
         report(resources)
-    #elif order == "espresso":
+    else:
+        drink = MENU[order]
+        print(check_resources(resources, drink['ingredients']))
+        
         
         
     
