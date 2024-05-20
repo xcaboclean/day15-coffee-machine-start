@@ -59,10 +59,11 @@ def payment():
 
     return amount_paind
 
-def check_payment():
+def check_payment(cash_box):
     value_paid = payment()
     change = 0
     change = value_paid - drink['cost']
+    cash_box += drink['cost']
     paid = False
     if change == 0:
         print("Paid.")
@@ -89,6 +90,7 @@ def recharge():
 
 
 led = True
+cash_box = 0
 
 while led == True:
     order = input("What would you like? (espresso/latte/cappuccino):")
@@ -99,10 +101,11 @@ while led == True:
         led = False
     elif order == "report":
         report(resources)
+        print(f"$ {cash_box}") 
     else:
         drink = MENU[order]
         if check_resources(resources, drink['ingredients']):
-            if check_payment():
+            if check_payment(cash_box):
                 make_drink();
 
         
