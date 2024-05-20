@@ -60,11 +60,20 @@ def payment():
     return amount_paind
 
 def check_payment():
-    if payment() >= drink['cost']:
-        print("Paid")
+    value_paid = payment()
+    change = 0
+    change = value_paid - drink['cost']
+    paid = False
+    if change == 0:
+        print("Paid.")
+        paid = True
+    elif change > 0:
+        print(f"Paid. Here is ${change:.2f} in change.")
+        paid = True
     else:
-        print("No Paid")
+        print(f"No Paid. Missing  ${change:.2f}")
     
+    return paid
 
 led = True
 
@@ -79,7 +88,9 @@ while led == True:
         drink = MENU[order]
         if check_resources(resources, drink['ingredients']):
             if check_payment():
-                print('')
+                print("Make coffee...")
+                print(f"Here is your {order} ☕️. Enjoy!")
+
         
         
         
