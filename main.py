@@ -75,6 +75,7 @@ def check_payment():
     
     return paid
 
+
 led = True
 
 while led == True:
@@ -88,7 +89,9 @@ while led == True:
         drink = MENU[order]
         if check_resources(resources, drink['ingredients']):
             if check_payment():
-                print("Make coffee...")
+                
+                for item, value in drink['ingredients'].items():
+                    resources[item] -= value      
                 print(f"Here is your {order} ☕️. Enjoy!")
 
         
