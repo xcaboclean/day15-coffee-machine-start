@@ -30,6 +30,8 @@ resources = {
     "coffee": 100,
 }
 
+cash_box = 0
+
 COIN = {
     "quarter": 0.25,
     "dime": 0.10,
@@ -59,20 +61,19 @@ def payment():
 
     return amount_paind
 
-def check_payment(cash_box):
+def check_payment():
     value_paid = payment()
     change = 0
-    change = value_paid - drink['cost']
-    cash_box += drink['cost']
+    change = round(value_paid - drink['cost'],2)
     paid = False
-    if change == 0:
-        print("Paid.")
-        paid = True
-    elif change > 0:
+    if change >= 0:
         print(f"Paid. Here is ${change:.2f} in change.")
+        global cash_box
+        cash_box += drink['cost']
         paid = True
     else:
-        print(f"No Paid. Missing  ${change:.2f}")
+        print(f"Sorry thats not enough money. Missing  ${change:.2f}. Money refunded.")
+        paid = False
     
     return paid
 
@@ -90,7 +91,7 @@ def recharge():
 
 
 led = True
-cash_box = 0
+
 
 while led == True:
     order = input("What would you like? (espresso/latte/cappuccino):")
@@ -101,11 +102,11 @@ while led == True:
         led = False
     elif order == "report":
         report(resources)
-        print(f"$ {cash_box}") 
+        print(f"Money: $ {cash_box}") 
     else:
         drink = MENU[order]
         if check_resources(resources, drink['ingredients']):
-            if check_payment(cash_box):
+            if check_payment():
                 make_drink();
 
         
