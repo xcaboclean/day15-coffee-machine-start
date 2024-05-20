@@ -81,12 +81,21 @@ def make_drink():
         resources[item] -= value      
     print(f"Here is your {order} ☕️. Enjoy!")
 
+def recharge():
+    resources["water"] = 300
+    resources["milk"]= 200
+    resources["coffee"]= 100
+    print("Ready.")
+
+
 led = True
 
 while led == True:
     order = input("What would you like? (espresso/latte/cappuccino):")
 
-    if order == "off":
+    if order == "recharge":
+        recharge();
+    elif order == "off":
         led = False
     elif order == "report":
         report(resources)
